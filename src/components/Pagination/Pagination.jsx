@@ -5,26 +5,19 @@ import {
   ChevronRightIcon,
 } from '@heroicons/react/solid';
 import { usePagination } from '../../hooks/usePagination';
-import { DOTS } from '../../utils';
 import { PagePill } from './PagePill';
 
 export const Pagination = ({
   onPageChange,
   totalCount,
-  siblings,
   currentPage,
   pageSize,
 }) => {
   const paginationRange = usePagination({
     currentPage,
     totalCount,
-    siblings,
     pageSize,
   });
-
-  if (currentPage === 0 || paginationRange.length < 2) {
-    return null;
-  }
 
   const onNext = () => {
     onPageChange(currentPage + 1);
@@ -37,7 +30,7 @@ export const Pagination = ({
   const lastPage = paginationRange[paginationRange.length - 1];
 
   return (
-    <ul className='flex items-center justify-center py-8'>
+    <ul className='flex items-center justify-center py-8 flex-wrap sm:flex-nowrap gap-1'>
       <PagePill onClick={() => onPageChange(1)} disabled={currentPage === 1}>
         <ChevronDoubleLeftIcon className='w-5 h-5' />
       </PagePill>
@@ -47,8 +40,6 @@ export const Pagination = ({
       </PagePill>
 
       {paginationRange.map((pageNum, idx) => {
-        if (pageNum === DOTS) return <PagePill> &#8230;</PagePill>;
-
         return (
           <PagePill
             onClick={() => onPageChange(pageNum)}
