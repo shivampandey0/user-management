@@ -10,7 +10,10 @@ export const TableContainer = () => {
     userState: { users },
     userDispatch,
   } = useData();
-  const { filteredData } = useFilter();
+  const {
+    filterState: { searchText },
+    filteredData,
+  } = useFilter();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -38,6 +41,10 @@ export const TableContainer = () => {
   useEffect(() => {
     loadData();
   }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchText]);
 
   const handleDeleteSelected = () => {
     userDispatch({
