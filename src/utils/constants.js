@@ -4,10 +4,12 @@ export const ACTION_TYPE = {
   SELECT_ALL: 'SELECT_ALL',
   DELETE: 'DELETE',
   DELETE_SELECTED: 'DELETE_SELECTED',
-  UPDATE:'UPDATE',
-  SEARCH: 'SEARCH'
+  UPDATE: 'UPDATE',
+  SEARCH: 'SEARCH',
+  SORT: 'SORT',
 };
 
 export const range = (start, totalCount) => {
   return [...Array(totalCount).keys()].map((i) => i + start);
 };
+

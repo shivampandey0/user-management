@@ -1,5 +1,10 @@
 import { createContext, useContext, useReducer } from 'react';
-import { filterReducer, initialState, searchUsers } from './reducer';
+import {
+  filterReducer,
+  initialState,
+  searchUsers,
+  sortUsersTable,
+} from './reducer';
 import { useData } from '../';
 
 const FilterContext = createContext();
@@ -9,9 +14,9 @@ const FilterProvider = ({ children }) => {
   const [filterState, filterDispatch] = useReducer(filterReducer, initialState);
   const { userState } = useData();
 
-  const filteredData = searchUsers(filterState, userState.users);
-  
-  
+  let filteredData = searchUsers(filterState, userState.users);
+  filteredData = sortUsersTable(filterState, filteredData);
+
   return (
     <FilterContext.Provider
       value={{ filteredData, filterState, filterDispatch }}
