@@ -1,8 +1,29 @@
-import { useState } from 'react';
 import { SearchIcon } from '@heroicons/react/solid';
+import { useCallback, useState } from 'react';
+import { useFilter } from '../../context';
+import { ACTION_TYPE } from '../../utils';
 
 export const SearchField = () => {
+  const { filterDispatch } = useFilter();
   const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = (value) => {
+    console.log(value);
+    filterDispatch({ type: ACTION_TYPE.SEARCH, payload: value });
+  };
+
+  const debounce = (func, delay) => {
+    let timerId;
+    return function () {
+      clearTimeout(timerId);
+      const term = arguments[0];
+      timerId = setTimeout(() => {
+        func(term);
+      }, delay);
+    };
+  };
+
+  const submitSearch = useCallback(debounce(handleSearch, 500), []);
 
   return (
     <div className='relative md:w-4/12'>
@@ -14,7 +35,10 @@ export const SearchField = () => {
         type='search'
         placeholder='Search by name, email or role'
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          submitSearch(e.target.value);
+        }}
       />
     </div>
   );

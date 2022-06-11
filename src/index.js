@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { DataProvider } from './context/DataContext/Context';
+import { DataProvider, FilterProvider } from './context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <DataProvider>
-      <App />
+      <FilterProvider>
+        <App />
+      </FilterProvider>
     </DataProvider>
   </React.StrictMode>
 );

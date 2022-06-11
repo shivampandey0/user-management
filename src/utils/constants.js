@@ -4,7 +4,8 @@ export const ACTION_TYPE = {
   SELECT_ALL: 'SELECT_ALL',
   DELETE: 'DELETE',
   DELETE_SELECTED: 'DELETE_SELECTED',
-  UPDATE:'UPDATE'
+  UPDATE:'UPDATE',
+  SEARCH: 'SEARCH'
 };
 
 export const DOTS = '...';

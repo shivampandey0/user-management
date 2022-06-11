@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Pagination, TableActions } from '../../components';
-import { useData } from '../../context';
+import { useData, useFilter } from '../../context';
 import { getUsers } from '../../services';
 import { ACTION_TYPE } from '../../utils';
 import { UsersTable } from './UsersTable';
@@ -10,6 +10,7 @@ export const TableContainer = () => {
     userState: { users },
     userDispatch,
   } = useData();
+  const { filteredData } = useFilter();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -18,8 +19,8 @@ export const TableContainer = () => {
   const currentUsers = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * 10;
     const lastPageIndex = firstPageIndex + 10;
-    return users.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, users]);
+    return filteredData.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, users, filteredData]);
 
   const loadData = async () => {
     try {
@@ -49,10 +50,10 @@ export const TableContainer = () => {
       <TableActions onDelete={handleDeleteSelected} />
       {loading && <h1>Loading</h1>}
       {error && <h1>Unable to fetch data!</h1>}
-      {users.length > 0 && <UsersTable users={currentUsers} />}
+      {filteredData.length > 0 && <UsersTable users={currentUsers} />}
       <Pagination
         currentPage={currentPage}
-        totalCount={users.length}
+        totalCount={filteredData.length}
         pageSize={10}
         onPageChange={(page) => setCurrentPage(page)}
       />
