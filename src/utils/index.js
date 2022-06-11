@@ -1,1 +1,1 @@
-export { ACTION_TYPE } from './constants';
+export { ACTION_TYPE, DOTS, range } from './constants';

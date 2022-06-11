@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { TableActions } from '../../components';
+import { useEffect, useMemo, useState } from 'react';
+import { Pagination, TableActions } from '../../components';
 import { useData } from '../../context';
 import { getUsers } from '../../services';
 import { ACTION_TYPE } from '../../utils';
@@ -13,6 +13,13 @@ export const TableContainer = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const currentUsers = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * 10;
+    const lastPageIndex = firstPageIndex + 10;
+    return users.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, users]);
 
   const loadData = async () => {
     try {
@@ -34,11 +41,17 @@ export const TableContainer = () => {
   console.log(users);
 
   return (
-    <section className='mx-auto py-8 px-12'>
+    <section className='mx-auto py-8 px-12 lg:w-2/3 w-full'>
       <TableActions />
       {loading && <h1>Loading</h1>}
       {error && <h1>Unable to fetch data!</h1>}
-      {users.length > 0 && <UsersTable />}
+      {users.length > 0 && <UsersTable users={currentUsers} />}
+      <Pagination
+        currentPage={currentPage}
+        totalCount={users.length}
+        pageSize={10}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
     </section>
   );
 };
