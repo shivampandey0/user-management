@@ -1,5 +1,11 @@
+import { TableContainer } from './pages';
+
 function App() {
-  return <>Hello World</>;
+  return (
+    <main className='h-screen w-screen bg-white'>
+      <TableContainer />
+    </main>
+  );
 }
 
 export default App;
