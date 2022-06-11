@@ -1,5 +1,10 @@
 export const ACTION_TYPE = {
   SUCCESS: 'SUCCESS',
+  SELECT: 'SELECT',
+  SELECT_ALL: 'SELECT_ALL',
+  DELETE: 'DELETE',
+  DELETE_SELECTED: 'DELETE_SELECTED',
+  UPDATE:'UPDATE'
 };
 
 export const DOTS = '...';

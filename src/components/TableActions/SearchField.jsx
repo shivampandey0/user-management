@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SearchIcon } from '@heroicons/react/outline';
+import { SearchIcon } from '@heroicons/react/solid';
 
 export const SearchField = () => {
   const [searchTerm, setSearchTerm] = useState('');

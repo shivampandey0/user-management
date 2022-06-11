@@ -38,11 +38,15 @@ export const TableContainer = () => {
     loadData();
   }, []);
 
-  console.log(users);
+  const handleDeleteSelected = () => {
+    userDispatch({
+      type: ACTION_TYPE.DELETE_SELECTED,
+    });
+  };
 
   return (
     <section className='mx-auto py-8 px-12 lg:w-2/3 w-full'>
-      <TableActions />
+      <TableActions onDelete={handleDeleteSelected} />
       {loading && <h1>Loading</h1>}
       {error && <h1>Unable to fetch data!</h1>}
       {users.length > 0 && <UsersTable users={currentUsers} />}
