@@ -10,12 +10,19 @@ export const filterReducer = (state, { type, payload }) => {
   switch (type) {
     case ACTION_TYPE.SEARCH:
       return { ...state, searchText: payload };
-    case ACTION_TYPE.SORT:
+    case ACTION_TYPE.SORT: {
+      let sortOrder =
+        state.sortBy !== payload
+          ? 'ASC'
+          : state.sortOrder === 'ASC'
+          ? 'DESC'
+          : 'ASC';
       return {
         ...state,
         sortBy: payload,
-        sortOrder: state.sortBy === payload ? 'DESC' : 'ASC',
+        sortOrder,
       };
+    }
     default:
       state;
   }
