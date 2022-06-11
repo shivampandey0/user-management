@@ -8,8 +8,6 @@ export const ACTION_TYPE = {
   SEARCH: 'SEARCH'
 };
 
-export const DOTS = '...';
-
 export const range = (start, totalCount) => {
   return [...Array(totalCount).keys()].map((i) => i + start);
 };

@@ -46,7 +46,7 @@ export const TableContainer = () => {
   };
 
   return (
-    <section className='mx-auto py-8 px-12 lg:w-2/3 w-full'>
+    <section className='mx-auto py-8 px-12 xl:w-2/3 w-full'>
       <TableActions onDelete={handleDeleteSelected} />
       {loading && <h1>Loading</h1>}
       {error && <h1>Unable to fetch data!</h1>}
